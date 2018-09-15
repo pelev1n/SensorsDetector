@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Observable<?> mShakeObservable;
     private Subscription mShakeSubscription;
-    private String state="DEFAULT";
+    public String state="DEFAULT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +46,34 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.line_x:
                 state ="X";
+                changeState(state);
                 return true;
 
             case  R.id.line_y:
                 state ="Y";
+                changeState(state);
                 return true;
+
             case R.id.line_z:
                 state ="Z";
+                changeState(state);
                 return true;
+
             case R.id.line_default:
                 state ="DEFAULT";
+                changeState(state);
                 return true;
             default:
                 state ="DEFAULT";
+                changeState(state);
                 return true;
         }
+    }
+
+    public void changeState(String state) {
+        mPlotters.get(0).setState(state);
+        mPlotters.get(1).setState(state);
+        mPlotters.get(2).setState(state);
     }
 
     private void setupPlotters() {

@@ -75,10 +75,22 @@ public class SensorPlotter {
         if (!canUpdateUi()) {
             return;
         }
-
-        appendData(mSeriesX, event.values[0]);
-        appendData(mSeriesY, event.values[1]);
-        appendData(mSeriesZ, event.values[2]);
+        switch (state) {
+            case "X":
+                appendData(mSeriesX, event.values[0]);
+                break;
+            case "Y":
+                appendData(mSeriesY, event.values[1]);
+                break;
+            case "Z":
+                appendData(mSeriesZ, event.values[2]);
+                break;
+            case "DEFAULT":
+                appendData(mSeriesX, event.values[0]);
+                appendData(mSeriesY, event.values[1]);
+                appendData(mSeriesZ, event.values[2]);
+                break;
+        }
     }
 
     private boolean canUpdateUi() {
@@ -94,6 +106,9 @@ public class SensorPlotter {
         series.appendData(new DataPoint(getX(), value), true, MAX_DATA_POINTS);
     }
 
+    public void setState(String s) {
+        this.state = s;
+    }
     private long getX() {
         return System.currentTimeMillis() - mStart;
     }
