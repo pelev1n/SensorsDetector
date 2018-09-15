@@ -30,10 +30,12 @@ public class SensorPlotter {
     private final Observable<SensorEvent> mSensorEventObservable;
     private long mLastUpdated = mStart;
     private Subscription mSubscription;
+    private String state;
 
 
     public SensorPlotter(@NonNull String name, @NonNull  GraphView graphView,
-                         @NonNull Observable<SensorEvent> sensorEventObservable) {
+                         @NonNull Observable<SensorEvent> sensorEventObservable,String state) {
+        this.state = state;
         mName = name;
         mSensorEventObservable = sensorEventObservable;
 
@@ -59,6 +61,7 @@ public class SensorPlotter {
         graphView.addSeries(mSeriesY);
         graphView.addSeries(mSeriesZ);
     }
+
 
     public void onResume(){
         mSubscription = mSensorEventObservable.subscribe(this::onSensorChanged);

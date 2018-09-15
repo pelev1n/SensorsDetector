@@ -5,7 +5,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.jjoe64.graphview.GraphView;
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Observable<?> mShakeObservable;
     private Subscription mShakeSubscription;
+    private String state="DEFAULT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,35 @@ public class MainActivity extends AppCompatActivity {
         mShakeObservable = ShakeDetector.create(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.line_x:
+                state ="X";
+                return true;
+
+            case  R.id.line_y:
+                state ="Y";
+                return true;
+            case R.id.line_z:
+                state ="Z";
+                return true;
+            case R.id.line_default:
+                state ="DEFAULT";
+                return true;
+            default:
+                state ="DEFAULT";
+                return true;
+        }
+    }
+
     private void setupPlotters() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
@@ -39,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
         List<Sensor> accSensors = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
         List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION);
 
-        mPlotters.add(new SensorPlotter("GRAV", (GraphView) findViewById(R.id.graph1), SensorEventObservableFactory.createSensorEventObservable(gravSensors.get(0), sensorManager)));
-        mPlotters.add(new SensorPlotter("ACC", (GraphView) findViewById(R.id.graph2), SensorEventObservableFactory.createSensorEventObservable(accSensors.get(0), sensorManager)));
-        mPlotters.add(new SensorPlotter("LIN", (GraphView) findViewById(R.id.graph3), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager)));
+        mPlotters.add(new SensorPlotter("GRAV", (GraphView) findViewById(R.id.graph1), SensorEventObservableFactory.createSensorEventObservable(gravSensors.get(0), sensorManager), state));
+        mPlotters.add(new SensorPlotter("ACC", (GraphView) findViewById(R.id.graph2), SensorEventObservableFactory.createSensorEventObservable(accSensors.get(0), sensorManager), state));
+        mPlotters.add(new SensorPlotter("LIN", (GraphView) findViewById(R.id.graph3), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state));
     }
 
     @Override
