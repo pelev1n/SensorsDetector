@@ -6,6 +6,53 @@
     android:orientation="vertical"
     tools:context="com.arkadygamza.shakedetector.MainActivity">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="35dp">
+
+        <EditText
+            android:id="@+id/value_edit"
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/btn_a"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_toRightOf="@+id/value_edit"
+            android:text="A"/>
+
+        <Button
+            android:id="@+id/btn_b"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_toRightOf="@+id/btn_a"
+            android:text="B"/>
+
+        <Button
+            android:id="@+id/btn_c"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_toRightOf="@+id/btn_b"
+            android:text="C"/>
+
+        <Button
+            android:id="@+id/btn_default"
+            android:layout_width="78dp"
+            android:layout_height="35dp"
+            android:layout_toRightOf="@+id/btn_c"
+            android:text="all"/>
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="78dp"
+            android:layout_height="35dp"
+            android:layout_toRightOf="@+id/btn_default"
+            android:text="cancel"/>
+
+
+    </RelativeLayout>
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph1"
         android:layout_width="match_parent"
