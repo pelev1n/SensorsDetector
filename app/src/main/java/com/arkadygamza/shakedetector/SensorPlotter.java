@@ -8,6 +8,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.util.Map;
+
 import rx.Observable;
 import rx.Subscription;
 
@@ -31,10 +33,11 @@ public class SensorPlotter {
     private long mLastUpdated = mStart;
     private Subscription mSubscription;
     private String state;
-
+    private Map<String,Integer> incValue;
 
     public SensorPlotter(@NonNull String name, @NonNull  GraphView graphView,
-                         @NonNull Observable<SensorEvent> sensorEventObservable,String state) {
+                         @NonNull Observable<SensorEvent> sensorEventObservable,String state,Map<String,Integer> incValue) {
+        this.incValue = incValue;
         this.state = state;
         mName = name;
         mSensorEventObservable = sensorEventObservable;
@@ -108,6 +111,10 @@ public class SensorPlotter {
 
     public void setState(String s) {
         this.state = s;
+    }
+
+    public void setIncValue(Map<String,Integer> v) {
+        this.incValue = v;
     }
     private long getX() {
         return System.currentTimeMillis() - mStart;
