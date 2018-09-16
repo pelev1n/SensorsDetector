@@ -8,45 +8,51 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="35dp">
+        android:layout_height="45dp">
 
         <EditText
             android:id="@+id/value_edit"
-            android:layout_width="100dp"
-            android:layout_height="match_parent" />
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"/>
 
         <Button
             android:id="@+id/btn_x"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/value_edit"
             android:text="X"/>
 
         <Button
             android:id="@+id/btn_y"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_x"
             android:text="Y"/>
 
         <Button
             android:id="@+id/btn_z"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_y"
             android:text="Z"/>
 
         <Button
             android:id="@+id/btn_all"
             android:layout_width="78dp"
-            android:layout_height="35dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_z"
             android:text="all"/>
 
         <Button
             android:id="@+id/btn_cancel"
-            android:layout_width="78dp"
-            android:layout_height="35dp"
+            android:layout_width="85dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_all"
             android:text="cancel"/>
 

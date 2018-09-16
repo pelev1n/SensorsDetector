@@ -26,7 +26,8 @@ public class SensorPlotter {
 
     private final long mStart = System.currentTimeMillis();
 
-    protected final LineGraphSeries<DataPoint> mSeriesX;
+    protected final LineGraphSeries<DataPoint> mSeriesXs;
+    protected final LineGraphSeries<DataPoint> mSeriesXf;
     protected final LineGraphSeries<DataPoint> mSeriesY;
     protected final LineGraphSeries<DataPoint> mSeriesZ;
     private final Observable<SensorEvent> mSensorEventObservable;
@@ -53,14 +54,18 @@ public class SensorPlotter {
         graphView.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graphView.getGridLabelRenderer().setVerticalLabelsVisible(false);
 
-        mSeriesX = new LineGraphSeries<>();
+        mSeriesXs = new LineGraphSeries<>();
+        mSeriesXf = new LineGraphSeries<>();
         mSeriesY = new LineGraphSeries<>();
         mSeriesZ = new LineGraphSeries<>();
-        mSeriesX.setColor(Color.RED);
+
+        mSeriesXs.setColor(Color.RED);
+        mSeriesXf.setColor(Color.YELLOW);
         mSeriesY.setColor(Color.GREEN);
         mSeriesZ.setColor(Color.BLUE);
 
-        graphView.addSeries(mSeriesX);
+        graphView.addSeries(mSeriesXs);
+        graphView.addSeries(mSeriesXf);
         graphView.addSeries(mSeriesY);
         graphView.addSeries(mSeriesZ);
     }
@@ -80,7 +85,8 @@ public class SensorPlotter {
         }
         switch (state) {
             case "X":
-                appendData(mSeriesX, event.values[0] + incValue.get("X"));
+                appendData(mSeriesXs, event.values[0] + incValue.get("X"));
+                appendData(mSeriesXf, event.values[0]);
                 break;
             case "Y":
                 appendData(mSeriesY, event.values[1] + incValue.get("Y"));
@@ -89,7 +95,8 @@ public class SensorPlotter {
                 appendData(mSeriesZ, event.values[2] + incValue.get("Z"));
                 break;
             case "DEFAULT":
-                appendData(mSeriesX, event.values[0] + incValue.get("X"));
+                appendData(mSeriesXs, event.values[0] + incValue.get("X"));
+                appendData(mSeriesXf, event.values[0] + incValue.get("X"));
                 appendData(mSeriesY, event.values[1] + incValue.get("Y"));
                 appendData(mSeriesZ, event.values[2] + incValue.get("Z"));
                 break;

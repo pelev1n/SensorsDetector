@@ -14,11 +14,15 @@ import android.widget.EditText;
 import com.jjoe64.graphview.GraphView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
 import rx.Subscription;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.functions.Func2;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        increaseValue = new HashMap<>();
         increaseValue.put("X",0);
         increaseValue.put("Y",0);
         increaseValue.put("Z",0);
@@ -70,6 +75,31 @@ public class MainActivity extends AppCompatActivity {
             updateIncValue("Z","0");
         });
 
+        btnX.setEnabled(false);
+        btnY.setEnabled(false);
+        btnZ.setEnabled(false);
+        btnCancel.setEnabled(false);
+        btnAll.setEnabled(false);
+
+        Observable<String> valueObservable = RxEditText.getTextWatcherObservable(editValue);
+        Observable.combineLatest(valueObservable,valueObservable, new Func2<String,String,Boolean>() {
+            @Override
+            public Boolean call(String s, String s2) {
+                if(s.isEmpty() || s2.isEmpty())
+                    return false;
+                else
+                    return true;
+            }
+        }).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                btnX.setEnabled(aBoolean);
+                btnY.setEnabled(aBoolean);
+                btnZ.setEnabled(aBoolean);
+                btnCancel.setEnabled(aBoolean);
+                btnAll.setEnabled(aBoolean);
+            }
+        });
     }
 
     public void updateIncValue(String line, String value) {
