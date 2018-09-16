@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         increaseValue.put("X",0);
         increaseValue.put("Y",0);
         increaseValue.put("Z",0);
-        increaseValue.put("DEFAULT",0);
 
         EditText editValue = (EditText) findViewById(R.id.value_edit);
         Button btnX = (Button) findViewById(R.id.btn_x);
@@ -60,14 +59,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnAll.setOnClickListener(view -> {
-            updateIncValue("DEFAULT",editValue.getText().toString());
+            updateIncValue("X",editValue.getText().toString());
+            updateIncValue("Y",editValue.getText().toString());
+            updateIncValue("Z",editValue.getText().toString());
         });
 
         btnCancel.setOnClickListener(view -> {
             updateIncValue("X","0");
             updateIncValue("Y","0");
             updateIncValue("Z","0");
-            updateIncValue("DEFAULY","0");
         });
 
     }

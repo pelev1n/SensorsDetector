@@ -80,18 +80,18 @@ public class SensorPlotter {
         }
         switch (state) {
             case "X":
-                appendData(mSeriesX, event.values[0]);
+                appendData(mSeriesX, event.values[0] + incValue.get("X"));
                 break;
             case "Y":
-                appendData(mSeriesY, event.values[1]);
+                appendData(mSeriesY, event.values[1] + incValue.get("Y"));
                 break;
             case "Z":
-                appendData(mSeriesZ, event.values[2]);
+                appendData(mSeriesZ, event.values[2] + incValue.get("Z"));
                 break;
             case "DEFAULT":
-                appendData(mSeriesX, event.values[0]);
-                appendData(mSeriesY, event.values[1]);
-                appendData(mSeriesZ, event.values[2]);
+                appendData(mSeriesX, event.values[0] + incValue.get("X"));
+                appendData(mSeriesY, event.values[1] + incValue.get("Y"));
+                appendData(mSeriesZ, event.values[2] + incValue.get("Z"));
                 break;
         }
     }
