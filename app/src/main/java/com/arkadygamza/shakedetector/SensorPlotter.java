@@ -102,7 +102,7 @@ public class SensorPlotter {
                 break;
             case "Z":
                 appendData(mSeriesZs, event.values[2]);
-                appendData(mSeriesZs, event.values[2] + incValue.get("Z"));
+                appendData(mSeriesZf, event.values[2] + incValue.get("Z"));
                 break;
             case "DEFAULT":
                 appendData(mSeriesXs, event.values[0]);
