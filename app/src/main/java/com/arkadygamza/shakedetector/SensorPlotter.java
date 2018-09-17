@@ -28,8 +28,10 @@ public class SensorPlotter {
 
     protected final LineGraphSeries<DataPoint> mSeriesXs;
     protected final LineGraphSeries<DataPoint> mSeriesXf;
-    protected final LineGraphSeries<DataPoint> mSeriesY;
-    protected final LineGraphSeries<DataPoint> mSeriesZ;
+    protected final LineGraphSeries<DataPoint> mSeriesYs;
+    protected final LineGraphSeries<DataPoint> mSeriesYf;
+    protected final LineGraphSeries<DataPoint> mSeriesZs;
+    protected final LineGraphSeries<DataPoint> mSeriesZf;
     private final Observable<SensorEvent> mSensorEventObservable;
     private long mLastUpdated = mStart;
     private Subscription mSubscription;
@@ -56,18 +58,24 @@ public class SensorPlotter {
 
         mSeriesXs = new LineGraphSeries<>();
         mSeriesXf = new LineGraphSeries<>();
-        mSeriesY = new LineGraphSeries<>();
-        mSeriesZ = new LineGraphSeries<>();
+        mSeriesYs = new LineGraphSeries<>();
+        mSeriesYf = new LineGraphSeries<>();
+        mSeriesZs = new LineGraphSeries<>();
+        mSeriesZf = new LineGraphSeries<>();
 
         mSeriesXs.setColor(Color.RED);
         mSeriesXf.setColor(Color.YELLOW);
-        mSeriesY.setColor(Color.GREEN);
-        mSeriesZ.setColor(Color.BLUE);
+        mSeriesYs.setColor(Color.GREEN);
+        mSeriesYf.setColor(Color.GRAY);
+        mSeriesZs.setColor(Color.BLUE);
+        mSeriesZf.setColor(Color.CYAN);
 
         graphView.addSeries(mSeriesXs);
         graphView.addSeries(mSeriesXf);
-        graphView.addSeries(mSeriesY);
-        graphView.addSeries(mSeriesZ);
+        graphView.addSeries(mSeriesYs);
+        graphView.addSeries(mSeriesYf);
+        graphView.addSeries(mSeriesZs);
+        graphView.addSeries(mSeriesZf);
     }
 
 
@@ -85,20 +93,24 @@ public class SensorPlotter {
         }
         switch (state) {
             case "X":
-                appendData(mSeriesXs, event.values[0] + incValue.get("X"));
-                appendData(mSeriesXf, event.values[0]);
+                appendData(mSeriesXs, event.values[0]);
+                appendData(mSeriesXf, event.values[0] + incValue.get("X"));
                 break;
             case "Y":
-                appendData(mSeriesY, event.values[1] + incValue.get("Y"));
+                appendData(mSeriesYs, event.values[1]);
+                appendData(mSeriesYf, event.values[1] + incValue.get("Y"));
                 break;
             case "Z":
-                appendData(mSeriesZ, event.values[2] + incValue.get("Z"));
+                appendData(mSeriesZs, event.values[2]);
+                appendData(mSeriesZs, event.values[2] + incValue.get("Z"));
                 break;
             case "DEFAULT":
-                appendData(mSeriesXs, event.values[0] + incValue.get("X"));
+                appendData(mSeriesXs, event.values[0]);
                 appendData(mSeriesXf, event.values[0] + incValue.get("X"));
-                appendData(mSeriesY, event.values[1] + incValue.get("Y"));
-                appendData(mSeriesZ, event.values[2] + incValue.get("Z"));
+                appendData(mSeriesYs, event.values[1]);
+                appendData(mSeriesYf, event.values[1] + incValue.get("Y"));
+                appendData(mSeriesZs, event.values[2]);
+                appendData(mSeriesZf, event.values[2] + incValue.get("Z"));
                 break;
         }
     }
