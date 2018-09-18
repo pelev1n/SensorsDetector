@@ -14,7 +14,8 @@
             android:id="@+id/value_edit"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:inputType="numberDecimal" />
 
         <Button
             android:id="@+id/btn_x"
@@ -22,7 +23,7 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/value_edit"
-            android:text="X"/>
+            android:text="X" />
 
         <Button
             android:id="@+id/btn_y"
@@ -30,7 +31,7 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_x"
-            android:text="Y"/>
+            android:text="Y" />
 
         <Button
             android:id="@+id/btn_z"
@@ -38,7 +39,7 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_y"
-            android:text="Z"/>
+            android:text="Z" />
 
         <Button
             android:id="@+id/btn_all"
@@ -46,7 +47,7 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_z"
-            android:text="all"/>
+            android:text="all" />
 
         <Button
             android:id="@+id/btn_cancel"
@@ -54,30 +55,15 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btn_all"
-            android:text="cancel"/>
+            android:text="cancel" />
 
 
     </RelativeLayout>
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/darker_gray" />
-
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/darker_gray" />
-
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@android:color/darker_gray" />
-
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/darker_gray" />
 </LinearLayout>

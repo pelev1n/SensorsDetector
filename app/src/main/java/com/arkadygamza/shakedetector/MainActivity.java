@@ -5,6 +5,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,16 +34,16 @@ public class MainActivity extends AppCompatActivity {
     private Observable<?> mShakeObservable;
     private Subscription mShakeSubscription;
     public String state="DEFAULT";
-    public Map<String,Integer> increaseValue;
+    public Map<String,Double> increaseValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         increaseValue = new HashMap<>();
-        increaseValue.put("X",0);
-        increaseValue.put("Y",0);
-        increaseValue.put("Z",0);
+        increaseValue.put("X",0.0);
+        increaseValue.put("Y",0.0);
+        increaseValue.put("Z",0.0);
 
         EditText editValue = (EditText) findViewById(R.id.value_edit);
         Button btnX = (Button) findViewById(R.id.btn_x);
@@ -70,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnCancel.setOnClickListener(view -> {
-            updateIncValue("X","0");
-            updateIncValue("Y","0");
-            updateIncValue("Z","0");
+            updateIncValue("X","0.0");
+            updateIncValue("Y","0.0");
+            updateIncValue("Z","0.0");
         });
 
         btnX.setEnabled(false);
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Observable.combineLatest(valueObservable,valueObservable, new Func2<String,String,Boolean>() {
             @Override
             public Boolean call(String s, String s2) {
-                if(s.isEmpty() || s2.isEmpty())
+                if(/*s.isEmpty() || s2.isEmpty() || */!s.contains("0.") || !s2.contains("0."))
                     return false;
                 else
                     return true;
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateIncValue(String line, String value) {
-        increaseValue.put(line,Integer.valueOf(value));
+        increaseValue.put(line,Double.valueOf(value));
         changeIncValue(increaseValue);
     }
 
@@ -146,26 +149,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeState(String state) {
         mPlotters.get(0).setState(state);
-        mPlotters.get(1).setState(state);
-        mPlotters.get(2).setState(state);
     }
 
-    public void changeIncValue(Map<String,Integer> value) {
+    public void changeIncValue(Map<String,Double> value) {
         mPlotters.get(0).setIncValue(value);
-        mPlotters.get(1).setIncValue(value);
-        mPlotters.get(2).setIncValue(value);
+
     }
 
     private void setupPlotters() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-        List<Sensor> gravSensors = sensorManager.getSensorList(Sensor.TYPE_GRAVITY);
-        List<Sensor> accSensors = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
         List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION);
-
-        mPlotters.add(new SensorPlotter("GRAV", (GraphView) findViewById(R.id.graph1), SensorEventObservableFactory.createSensorEventObservable(gravSensors.get(0), sensorManager), state,increaseValue));
-        mPlotters.add(new SensorPlotter("ACC", (GraphView) findViewById(R.id.graph2), SensorEventObservableFactory.createSensorEventObservable(accSensors.get(0), sensorManager), state,increaseValue));
-        mPlotters.add(new SensorPlotter("LIN", (GraphView) findViewById(R.id.graph3), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state,increaseValue));
+        mPlotters.add(new SensorPlotter("LIN", (GraphView) findViewById(R.id.graph1), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state,increaseValue));
     }
 
     @Override

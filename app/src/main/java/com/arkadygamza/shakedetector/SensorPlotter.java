@@ -36,10 +36,10 @@ public class SensorPlotter {
     private long mLastUpdated = mStart;
     private Subscription mSubscription;
     private String state;
-    private Map<String,Integer> incValue;
+    private Map<String,Double> incValue;
 
     public SensorPlotter(@NonNull String name, @NonNull  GraphView graphView,
-                         @NonNull Observable<SensorEvent> sensorEventObservable,String state,Map<String,Integer> incValue) {
+                         @NonNull Observable<SensorEvent> sensorEventObservable,String state,Map<String,Double> incValue) {
         this.incValue = incValue;
         this.state = state;
         mName = name;
@@ -132,7 +132,7 @@ public class SensorPlotter {
         this.state = s;
     }
 
-    public void setIncValue(Map<String,Integer> v) {
+    public void setIncValue(Map<String,Double> v) {
         this.incValue = v;
     }
     private long getX() {
