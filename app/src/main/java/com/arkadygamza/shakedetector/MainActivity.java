@@ -27,7 +27,7 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.functions.Func2;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private final List<SensorPlotter> mPlotters = new ArrayList<>(3);
 
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private Subscription mShakeSubscription;
     public String state="DEFAULT";
     public Map<String,Double> increaseValue;
+    EditText editValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,38 +46,21 @@ public class MainActivity extends AppCompatActivity {
         increaseValue.put("Y",0.0);
         increaseValue.put("Z",0.0);
 
-        EditText editValue = (EditText) findViewById(R.id.value_edit);
+        editValue = (EditText) findViewById(R.id.value_edit);
         Button btnX = (Button) findViewById(R.id.btn_x);
         Button btnY = (Button) findViewById(R.id.btn_y);
         Button btnZ = (Button) findViewById(R.id.btn_z);
         Button btnAll = (Button) findViewById(R.id.btn_all);
         Button btnCancel = (Button) findViewById(R.id.btn_cancel);
 
+        btnX.setOnClickListener(this);
+        btnY.setOnClickListener(this);
+        btnZ.setOnClickListener(this);
+        btnAll.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+
         setupPlotters();
         mShakeObservable = ShakeDetector.create(this);
-        btnX.setOnClickListener(view -> {
-            updateIncValue("X",editValue.getText().toString());
-        });
-
-        btnY.setOnClickListener(view -> {
-            updateIncValue("Y",editValue.getText().toString());
-        });
-
-        btnZ.setOnClickListener(view -> {
-            updateIncValue("Z",editValue.getText().toString());
-        });
-
-        btnAll.setOnClickListener(view -> {
-            updateIncValue("X",editValue.getText().toString());
-            updateIncValue("Y",editValue.getText().toString());
-            updateIncValue("Z",editValue.getText().toString());
-        });
-
-        btnCancel.setOnClickListener(view -> {
-            updateIncValue("X","0.0");
-            updateIncValue("Y","0.0");
-            updateIncValue("Z","0.0");
-        });
 
         btnX.setEnabled(false);
         btnY.setEnabled(false);
@@ -88,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Observable.combineLatest(valueObservable,valueObservable, new Func2<String,String,Boolean>() {
             @Override
             public Boolean call(String s, String s2) {
-                if(/*s.isEmpty() || s2.isEmpty() || */!s.contains("0.") || !s2.contains("0."))
+                if(s.isEmpty() || s2.isEmpty())
                     return false;
                 else
                     return true;
@@ -174,5 +158,30 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         Observable.from(mPlotters).subscribe(SensorPlotter::onPause);
         mShakeSubscription.unsubscribe();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_x:
+                updateIncValue("X",editValue.getText().toString());
+                break;
+            case R.id.btn_y:
+                updateIncValue("Y",editValue.getText().toString());
+                break;
+            case R.id.btn_z:
+                updateIncValue("Z",editValue.getText().toString());
+                break;
+            case R.id.btn_all:
+                updateIncValue("X",editValue.getText().toString());
+                updateIncValue("Y",editValue.getText().toString());
+                updateIncValue("Z",editValue.getText().toString());
+                break;
+            case R.id.btn_cancel:
+                updateIncValue("X","0.0");
+                updateIncValue("Y","0.0");
+                updateIncValue("Z","0.0");
+                break;
+        }
     }
 }
