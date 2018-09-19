@@ -6,7 +6,7 @@
     tools:context="com.arkadygamza.shakedetector.MarblesActivity">
 
     <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph1"
+        android:id="@+id/graph_gyroscope"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray" />

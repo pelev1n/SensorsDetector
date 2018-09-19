@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/line_x"
+        android:id="@+id/line_gyroscope"
         android:orderInCategory="1"
-        android:title="X" />
+        android:title="Gyroscope" />
     <item
-        android:id="@+id/line_y"
+        android:id="@+id/line_accelerometr"
         android:orderInCategory="2"
-        android:title="Y" />
-    <item
-        android:id="@+id/line_z"
-        android:orderInCategory="3"
-        android:title="Z" />
-    <item
-        android:id="@+id/line_default"
-        android:orderInCategory="4"
-        android:title="default" />
+        android:title="accelerometr" />
 </menu>

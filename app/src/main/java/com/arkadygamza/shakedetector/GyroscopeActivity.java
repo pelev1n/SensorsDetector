@@ -28,7 +28,7 @@ import rx.Subscription;
 import rx.functions.Action1;
 import rx.functions.Func2;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class GyroscopeActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final List<SensorPlotter> mPlotters = new ArrayList<>(3);
 
@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_geroscope);
         increaseValue = new HashMap<>();
         increaseValue.put("X", 0.0);
         increaseValue.put("Y", 0.0);
         increaseValue.put("Z", 0.0);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner_gyroscope);
         ArrayAdapter<?> adapter =
                 ArrayAdapter.createFromResource(this, R.array.list, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -152,12 +152,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id) {
             case R.id.line_gyroscope:
                 state = "gyroscope";
-                Intent intent = new Intent(MainActivity.this,GyroscopeActivity.class);
-                startActivity(intent);
                 return true;
 
             case R.id.line_accelerometr:
                 state = "accelerometr";
+                Intent intent = new Intent(GyroscopeActivity.this,MainActivity.class);
+                startActivity(intent);
                 return true;
 
             default:
@@ -176,8 +176,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setupPlotters() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION);
-        mPlotters.add(new SensorPlotter("LIN", (GraphView) findViewById(R.id.graph_accelerometr), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue));
+        List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE);
+        mPlotters.add(new SensorPlotter("GYR", (GraphView) findViewById(R.id.graph_gyroscope), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue));
     }
 
     @Override

@@ -7,17 +7,17 @@
     tools:context="com.arkadygamza.shakedetector.MainActivity">
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_gyroscope"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/list" />
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph_accelerometr"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/darker_gray" />
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph_gyroscope"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
