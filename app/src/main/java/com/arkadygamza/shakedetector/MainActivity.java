@@ -160,6 +160,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 state = "accelerometr";
                 return true;
 
+            case R.id.line_accelerometr_geroscope:
+                Intent i = new Intent(MainActivity.this,AccelerGerosActivity.class);
+                startActivity(i);
+                return true;
+
             default:
                 return true;
         }

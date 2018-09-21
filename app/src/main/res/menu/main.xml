@@ -10,6 +10,6 @@
         android:title="accelerometr" />
     <item
         android:id="@+id/line_accelerometr_geroscope"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="acceler and geros" />
 </menu>
