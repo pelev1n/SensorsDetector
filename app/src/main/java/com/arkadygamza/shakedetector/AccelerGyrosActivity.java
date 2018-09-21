@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +30,7 @@ import rx.Subscription;
 import rx.functions.Action1;
 import rx.functions.Func2;
 
-public class AccelerGerosActivity extends AppCompatActivity implements View.OnClickListener {
+public class AccelerGyrosActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private final List<SensorPlotterPrint> mPlotters = new ArrayList<>(3);
@@ -51,7 +50,7 @@ public class AccelerGerosActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_acceler_geros);
+        setContentView(R.layout.activity_acceler_gyros);
         increaseValue = new HashMap<>();
         increaseValue.put("X", 0.0);
         increaseValue.put("Y", 0.0);
@@ -107,12 +106,12 @@ public class AccelerGerosActivity extends AppCompatActivity implements View.OnCl
         Button btnZ = (Button) findViewById(R.id.btn_z);
         Button btnAll = (Button) findViewById(R.id.btn_all);
         Button btnCancel = (Button) findViewById(R.id.btn_cancel);
-        linX = (TextView) findViewById(R.id.coordinats_liner_x);
-        linY = (TextView) findViewById(R.id.coordinats_liner_y);
-        linZ = (TextView) findViewById(R.id.coordinats_liner_z);
-        gerX = (TextView) findViewById(R.id.coordinats_geros_x);
-        gerY = (TextView) findViewById(R.id.coordinats_geros_y);
-        gerZ = (TextView) findViewById(R.id.coordinats_geros_z);
+        linX = (TextView) findViewById(R.id.coordinats_acceler_x);
+        linY = (TextView) findViewById(R.id.coordinats_acceler_y);
+        linZ = (TextView) findViewById(R.id.coordinats_acceler_z);
+        gerX = (TextView) findViewById(R.id.coordinats_gyros_x);
+        gerY = (TextView) findViewById(R.id.coordinats_gyros_y);
+        gerZ = (TextView) findViewById(R.id.coordinats_gyros_z);
 
 
         btnX.setOnClickListener(this);
@@ -169,13 +168,13 @@ public class AccelerGerosActivity extends AppCompatActivity implements View.OnCl
         switch (id) {
             case R.id.line_gyroscope:
                 state = "gyroscope";
-                Intent intent = new Intent(AccelerGerosActivity.this, GyroscopeActivity.class);
+                Intent intent = new Intent(AccelerGyrosActivity.this, GyroscopeActivity.class);
                 startActivity(intent);
                 return true;
 
             case R.id.line_accelerometr:
                 state = "accelerometr";
-                Intent i = new Intent(AccelerGerosActivity.this, MainActivity.class);
+                Intent i = new Intent(AccelerGyrosActivity.this, MainActivity.class);
                 startActivity(i);
                 return true;
 
@@ -202,7 +201,7 @@ public class AccelerGerosActivity extends AppCompatActivity implements View.OnCl
         List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION);
         List<Sensor> gyroscopeAccSensors = sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE);
         mPlotters.add(new SensorPlotterPrint("LIN", (GraphView) findViewById(R.id.graph_accelerometr_both), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue, this));
-        mPlotters.add(new SensorPlotterPrint("GER", (GraphView) findViewById(R.id.graph_geroscope_both), SensorEventObservableFactory.createSensorEventObservable(gyroscopeAccSensors.get(0), sensorManager), state, increaseValue, this));
+        mPlotters.add(new SensorPlotterPrint("GER", (GraphView) findViewById(R.id.graph_gyroscope_both), SensorEventObservableFactory.createSensorEventObservable(gyroscopeAccSensors.get(0), sensorManager), state, increaseValue, this));
     }
 
     @Override

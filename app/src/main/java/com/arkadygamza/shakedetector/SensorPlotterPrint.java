@@ -38,11 +38,11 @@ public class SensorPlotterPrint {
     private Subscription mSubscription;
     private String state;
     private Map<String,Double> incValue;
-    private AccelerGerosActivity activity;
+    private AccelerGyrosActivity activity;
 
     public SensorPlotterPrint(@NonNull String name, @NonNull  GraphView graphView,
                               @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String,Double> incValue,
-                              AccelerGerosActivity view) {
+                              AccelerGyrosActivity view) {
         this.incValue = incValue;
         this.state = state;
         mName = name;

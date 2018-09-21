@@ -41,7 +41,7 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_geroscope);
+        setContentView(R.layout.activity_gyroscope);
         increaseValue = new HashMap<>();
         increaseValue.put("X", 0.0);
         increaseValue.put("Y", 0.0);
