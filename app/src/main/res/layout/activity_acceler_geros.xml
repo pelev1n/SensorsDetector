@@ -13,14 +13,14 @@
         android:entries="@array/list" />
 
     <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph_accelerometr"
+        android:id="@+id/graph_accelerometr_both"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@android:color/darker_gray" />
 
     <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph_geros"
+        android:id="@+id/graph_geroscope_both"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
