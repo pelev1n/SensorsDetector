@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.arkadygamza.shakedetector.MainActivity">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/list" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph_accelerometr"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph_geros"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/darker_gray" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/coordinats_liner"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Linear Stats:"/>
+
+            <TextView
+                android:id="@+id/coordinats_liner_x"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:text="X:"/>
+
+            <TextView
+                android:id="@+id/coordinats_liner_y"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:text="Y:"/>
+            <TextView
+                android:id="@+id/coordinats_liner_z"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="Z:"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/coordinats_geros"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Geroscope Stats:"/>
+
+            <TextView
+                android:id="@+id/coordinats_geros_x"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:text="X:"/>
+
+            <TextView
+                android:id="@+id/coordinats_geros_y"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:text="Y:"/>
+            <TextView
+                android:id="@+id/coordinats_geros_z"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:text="Z:"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="45dp">
+
+        <EditText
+            android:id="@+id/value_edit"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btn_x"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/value_edit"
+            android:text="X" />
+
+        <Button
+            android:id="@+id/btn_y"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btn_x"
+            android:text="Y" />
+
+        <Button
+            android:id="@+id/btn_z"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btn_y"
+            android:text="Z" />
+
+        <Button
+            android:id="@+id/btn_all"
+            android:layout_width="78dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btn_z"
+            android:text="all" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="85dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btn_all"
+            android:text="cancel" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
