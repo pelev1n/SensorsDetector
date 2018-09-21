@@ -31,7 +31,7 @@ import rx.Subscription;
 import rx.functions.Action1;
 import rx.functions.Func2;
 
-public class AccelerGerosActivity extends AppCompatActivity  implements View.OnClickListener{
+public class AccelerGerosActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private final List<SensorPlotterPrint> mPlotters = new ArrayList<>(3);
@@ -41,6 +41,12 @@ public class AccelerGerosActivity extends AppCompatActivity  implements View.OnC
     public String state = "DEFAULT";
     public Map<String, Double> increaseValue;
     EditText editValue;
+    TextView linX;
+    TextView linY;
+    TextView linZ;
+    TextView gerX;
+    TextView gerY;
+    TextView gerZ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +107,12 @@ public class AccelerGerosActivity extends AppCompatActivity  implements View.OnC
         Button btnZ = (Button) findViewById(R.id.btn_z);
         Button btnAll = (Button) findViewById(R.id.btn_all);
         Button btnCancel = (Button) findViewById(R.id.btn_cancel);
+        linX = (TextView) findViewById(R.id.coordinats_liner_x);
+        linY = (TextView) findViewById(R.id.coordinats_liner_y);
+        linZ = (TextView) findViewById(R.id.coordinats_liner_z);
+        gerX = (TextView) findViewById(R.id.coordinats_geros_x);
+        gerY = (TextView) findViewById(R.id.coordinats_geros_y);
+        gerZ = (TextView) findViewById(R.id.coordinats_geros_z);
 
 
         btnX.setOnClickListener(this);
@@ -189,8 +201,8 @@ public class AccelerGerosActivity extends AppCompatActivity  implements View.OnC
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION);
         List<Sensor> gyroscopeAccSensors = sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE);
-        mPlotters.add(new SensorPlotterPrint("LIN", (GraphView) findViewById(R.id.graph_accelerometr_both), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue,this));
-        mPlotters.add(new SensorPlotterPrint("GER", (GraphView) findViewById(R.id.graph_geroscope_both), SensorEventObservableFactory.createSensorEventObservable(gyroscopeAccSensors.get(0), sensorManager), state, increaseValue,this));
+        mPlotters.add(new SensorPlotterPrint("LIN", (GraphView) findViewById(R.id.graph_accelerometr_both), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue, this));
+        mPlotters.add(new SensorPlotterPrint("GER", (GraphView) findViewById(R.id.graph_geroscope_both), SensorEventObservableFactory.createSensorEventObservable(gyroscopeAccSensors.get(0), sensorManager), state, increaseValue, this));
     }
 
     @Override
@@ -233,7 +245,21 @@ public class AccelerGerosActivity extends AppCompatActivity  implements View.OnC
     }
 
     public void printValueInText(SensorEvent event) {
+        int type = event.sensor.getType();
+        switch (type) {
+            case Sensor.TYPE_LINEAR_ACCELERATION:
+                linX.setText("X: " + String.format("%.2f", event.values[0]));
+                linY.setText("Y: " + String.format("%.2f", event.values[1]));
+                linZ.setText("Z: " + String.format("%.2f", event.values[2]));
+                break;
+            case Sensor.TYPE_GYROSCOPE:
+                gerX.setText("X: " + String.format("%.2f", event.values[0]));
+                gerY.setText("Y: " + String.format("%.2f", event.values[1]));
+                gerZ.setText("Z: " + String.format("%.2f", event.values[2]));
+                break;
 
+        }
     }
+
 
 }

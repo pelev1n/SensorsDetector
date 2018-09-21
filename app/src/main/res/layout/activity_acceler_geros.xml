@@ -29,35 +29,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/coordinats_liner"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
                 android:text="Linear Stats:"/>
 
             <TextView
                 android:id="@+id/coordinats_liner_x"
-                android:layout_width="35dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="X:"/>
 
             <TextView
                 android:id="@+id/coordinats_liner_y"
-                android:layout_width="35dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="Y:"/>
             <TextView
                 android:id="@+id/coordinats_liner_z"
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
                 android:text="Z:"/>
 
         </LinearLayout>
@@ -65,30 +65,30 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/coordinats_geros"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
                 android:text="Geroscope Stats:"/>
 
             <TextView
                 android:id="@+id/coordinats_geros_x"
-                android:layout_width="35dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="X:"/>
 
             <TextView
                 android:id="@+id/coordinats_geros_y"
-                android:layout_width="35dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:text="Y:"/>
             <TextView
                 android:id="@+id/coordinats_geros_z"
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
                 android:text="Z:"/>
 
         </LinearLayout>

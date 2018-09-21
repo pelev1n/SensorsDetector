@@ -4,7 +4,6 @@ package com.arkadygamza.shakedetector;
 import android.graphics.Color;
 import android.hardware.SensorEvent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
