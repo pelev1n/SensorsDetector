@@ -19,7 +19,7 @@ import rx.Subscription;
  */
 public class SensorPlotterPrint {
     public static final int MAX_DATA_POINTS = 50;
-    public static final int VIEWPORT_SECONDS = 5;
+    private int VIEWPORT_SECONDS = 5;
     public static final int FPS = 10;
 
     @NonNull
@@ -145,5 +145,9 @@ public class SensorPlotterPrint {
     }
     private long getX() {
         return System.currentTimeMillis() - mStart;
+    }
+
+    public void changeViewPort(int v) {
+        this.VIEWPORT_SECONDS = v;
     }
 }
