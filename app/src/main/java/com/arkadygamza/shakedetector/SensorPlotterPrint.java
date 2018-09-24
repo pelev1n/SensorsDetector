@@ -39,8 +39,9 @@ public class SensorPlotterPrint {
     private String state;
     private Map<String,Double> incValue;
     private AccelerGyrosActivity activity;
+    GraphView graphView;
 
-    public SensorPlotterPrint(@NonNull String name, @NonNull  GraphView graphView,
+    public SensorPlotterPrint(@NonNull String name, @NonNull  GraphView graphViewOutside,
                               @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String,Double> incValue,
                               AccelerGyrosActivity view) {
         this.incValue = incValue;
@@ -49,6 +50,7 @@ public class SensorPlotterPrint {
         mSensorEventObservable = sensorEventObservable;
         this.activity = view;
 
+        this.graphView = graphViewOutside;
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setMinX(0);
         graphView.getViewport().setMaxX(VIEWPORT_SECONDS * 1000); // number of ms in viewport
@@ -148,6 +150,7 @@ public class SensorPlotterPrint {
     }
 
     public void changeViewPort(int v) {
-        this.VIEWPORT_SECONDS = v;
+        graphView.getViewport().setMaxX(v * 1000);
+        System.out.println("!!!!!!! " + v);
     }
 }
