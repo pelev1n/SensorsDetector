@@ -18,7 +18,7 @@ import rx.Subscription;
  * Draws graph of sensor events
  */
 public class SensorPlotterPrint {
-    public static final int MAX_DATA_POINTS = 50;
+    private  int MAX_DATA_POINTS;
     private int VIEWPORT_SECONDS;
     public static final int FPS = 10;
 
@@ -43,13 +43,14 @@ public class SensorPlotterPrint {
 
     public SensorPlotterPrint(@NonNull String name, @NonNull  GraphView graphViewOutside,
                               @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String,Double> incValue,
-                              AccelerGyrosActivity view,int viewPort) {
+                              AccelerGyrosActivity view,int v) {
         this.incValue = incValue;
         this.state = state;
         mName = name;
         mSensorEventObservable = sensorEventObservable;
         this.activity = view;
-        this.VIEWPORT_SECONDS = viewPort;
+        this.VIEWPORT_SECONDS = v;
+        MAX_DATA_POINTS = VIEWPORT_SECONDS*10;
 
         this.graphView = graphViewOutside;
         graphView.getViewport().setXAxisBoundsManual(true);
@@ -151,9 +152,4 @@ public class SensorPlotterPrint {
         return System.currentTimeMillis() - mStart;
     }
 
-    public void changeViewPort(int v) {
-        this.VIEWPORT_SECONDS = v;
-        graphView.getViewport().setMaxX(VIEWPORT_SECONDS * 1000);
-        System.out.println("!!!!!!! " + v);
-    }
 }

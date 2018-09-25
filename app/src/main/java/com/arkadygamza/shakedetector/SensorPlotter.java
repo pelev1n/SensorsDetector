@@ -185,7 +185,4 @@ public class SensorPlotter {
         return System.currentTimeMillis() - mStart;
     }
 
-    public void changeViewPort(int v) {
-        this.VIEWPORT_SECONDS = v;
-    }
 }

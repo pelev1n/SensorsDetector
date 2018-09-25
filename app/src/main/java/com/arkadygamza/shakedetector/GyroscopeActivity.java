@@ -77,7 +77,6 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                /*mPlotters.get(0).changeViewPort(see)*/;
                 restartActivity(GyroscopeActivity.this);
             }
         });
