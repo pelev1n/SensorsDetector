@@ -18,7 +18,7 @@ import rx.Subscription;
  * Draws graph of sensor events
  */
 public class SensorPlotter {
-    public static final int MAX_DATA_POINTS = 50;
+    private int MAX_DATA_POINTS = 50;
     private int VIEWPORT_SECONDS;
     public static final int FPS = 10;
 
@@ -86,11 +86,14 @@ public class SensorPlotter {
         this.state = state;
         mName = name;
         this.VIEWPORT_SECONDS = v;
+        MAX_DATA_POINTS = VIEWPORT_SECONDS*10;
         mSensorEventObservable = sensorEventObservable;
+
 
         graphView.getViewport().setXAxisBoundsManual(true);
         graphView.getViewport().setMinX(0);
         graphView.getViewport().setMaxX(VIEWPORT_SECONDS * 1000); // number of ms in viewport
+
 
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMinY(-20);
