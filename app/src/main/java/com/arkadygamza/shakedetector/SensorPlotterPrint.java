@@ -19,7 +19,7 @@ import rx.Subscription;
  */
 public class SensorPlotterPrint {
     public static final int MAX_DATA_POINTS = 50;
-    private int VIEWPORT_SECONDS = 5;
+    private int VIEWPORT_SECONDS;
     public static final int FPS = 10;
 
     @NonNull
@@ -43,12 +43,13 @@ public class SensorPlotterPrint {
 
     public SensorPlotterPrint(@NonNull String name, @NonNull  GraphView graphViewOutside,
                               @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String,Double> incValue,
-                              AccelerGyrosActivity view) {
+                              AccelerGyrosActivity view,int viewPort) {
         this.incValue = incValue;
         this.state = state;
         mName = name;
         mSensorEventObservable = sensorEventObservable;
         this.activity = view;
+        this.VIEWPORT_SECONDS = viewPort;
 
         this.graphView = graphViewOutside;
         graphView.getViewport().setXAxisBoundsManual(true);
@@ -58,6 +59,7 @@ public class SensorPlotterPrint {
         graphView.getViewport().setYAxisBoundsManual(true);
         graphView.getViewport().setMinY(-20);
         graphView.getViewport().setMaxY(20);
+        graphView.onDataChanged(false, false);
 
         graphView.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graphView.getGridLabelRenderer().setVerticalLabelsVisible(false);
@@ -150,7 +152,8 @@ public class SensorPlotterPrint {
     }
 
     public void changeViewPort(int v) {
-        graphView.getViewport().setMaxX(v * 1000);
+        this.VIEWPORT_SECONDS = v;
+        graphView.getViewport().setMaxX(VIEWPORT_SECONDS * 1000);
         System.out.println("!!!!!!! " + v);
     }
 }

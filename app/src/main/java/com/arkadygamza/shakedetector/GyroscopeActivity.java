@@ -1,9 +1,11 @@
 package com.arkadygamza.shakedetector;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -38,11 +40,19 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
     public String state = "DEFAULT";
     public Map<String, Double> increaseValue;
     EditText editValue;
+    public int VIEWPORT_SECONDS;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gyroscope);
+        if(savedInstanceState == null) {
+            VIEWPORT_SECONDS = 5;
+        } else {
+            VIEWPORT_SECONDS = (int) savedInstanceState.getSerializable("VIEWPORT_SECONDS");
+        }
+
         increaseValue = new HashMap<>();
         increaseValue.put("X", 0.0);
         increaseValue.put("Y", 0.0);
@@ -57,7 +67,7 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                mPlotters.get(0).changeViewPort(i);
+                VIEWPORT_SECONDS = i;
             }
 
             @Override
@@ -67,7 +77,8 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                /*mPlotters.get(0).changeViewPort(see)*/;
+                restartActivity(GyroscopeActivity.this);
             }
         });
 
@@ -166,6 +177,15 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
         return true;
     }
 
+    public void restartActivity(Activity activity){
+        if(Build.VERSION.SDK_INT >= 11) {
+            activity.recreate();
+        } else {
+            activity.finish();
+            activity.startActivity(activity.getIntent());
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -197,7 +217,16 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
     private void setupPlotters() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE);
-        mPlotters.add(new SensorPlotter("GYR", (GraphView) findViewById(R.id.graph_gyroscope), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue));
+        mPlotters.add(new SensorPlotter("GYR", (GraphView) findViewById(R.id.graph_gyroscope), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue,VIEWPORT_SECONDS));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(VIEWPORT_SECONDS > 0) {
+            outState.putSerializable("VIEWPORT_SECONDS",VIEWPORT_SECONDS);
+        }
+
     }
 
     @Override
