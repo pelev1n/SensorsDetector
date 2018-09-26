@@ -13,7 +13,7 @@ import rx.subjects.PublishSubject;
  */
 
 public class RxEditText {
-    public static Observable<String> getTextWatcherObservable(@NonNull final EditText editText){
+    public static Observable<String> getTextWatcherObservable(@NonNull final EditText editText) {
 
         final PublishSubject<String> subject = PublishSubject.create();
 
@@ -30,7 +30,7 @@ public class RxEditText {
 
             @Override
             public void afterTextChanged(Editable editable) {
-             subject.onNext(editable.toString());
+                subject.onNext(editable.toString());
             }
         });
 

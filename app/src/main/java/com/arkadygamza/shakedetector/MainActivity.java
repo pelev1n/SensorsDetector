@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             VIEWPORT_SECONDS = 5;
         } else {
             VIEWPORT_SECONDS = (int) savedInstanceState.getSerializable("VIEWPORT_SECONDS");
@@ -172,8 +172,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    public void restartActivity(Activity activity){
-        if(Build.VERSION.SDK_INT >= 11) {
+    public void restartActivity(Activity activity) {
+        if (Build.VERSION.SDK_INT >= 11) {
             activity.recreate();
         } else {
             activity.finish();
@@ -184,8 +184,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(VIEWPORT_SECONDS > 0) {
-            outState.putSerializable("VIEWPORT_SECONDS",VIEWPORT_SECONDS);
+        if (VIEWPORT_SECONDS > 0) {
+            outState.putSerializable("VIEWPORT_SECONDS", VIEWPORT_SECONDS);
         }
 
     }
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id) {
             case R.id.line_gyroscope:
                 state = "gyroscope";
-                Intent intent = new Intent(MainActivity.this,GyroscopeActivity.class);
+                Intent intent = new Intent(MainActivity.this, GyroscopeActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
 
             case R.id.line_accelerometr_geroscope:
-                Intent i = new Intent(MainActivity.this,AccelerGyrosActivity.class);
+                Intent i = new Intent(MainActivity.this, AccelerGyrosActivity.class);
                 startActivity(i);
                 return true;
 
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setupPlotters() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_LINEAR_ACCELERATION);
-        mPlotters.add(new SensorPlotter("LIN", (GraphView) findViewById(R.id.graph_accelerometr), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue,VIEWPORT_SECONDS));
+        mPlotters.add(new SensorPlotter("LIN", (GraphView) findViewById(R.id.graph_accelerometr), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue, VIEWPORT_SECONDS));
     }
 
     @Override

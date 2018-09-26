@@ -47,7 +47,7 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gyroscope);
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             VIEWPORT_SECONDS = 5;
         } else {
             VIEWPORT_SECONDS = (int) savedInstanceState.getSerializable("VIEWPORT_SECONDS");
@@ -174,8 +174,8 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
         return true;
     }
 
-    public void restartActivity(Activity activity){
-        if(Build.VERSION.SDK_INT >= 11) {
+    public void restartActivity(Activity activity) {
+        if (Build.VERSION.SDK_INT >= 11) {
             activity.recreate();
         } else {
             activity.finish();
@@ -193,7 +193,7 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
 
             case R.id.line_accelerometr:
                 state = "accelerometr";
-                Intent intent = new Intent(GyroscopeActivity.this,MainActivity.class);
+                Intent intent = new Intent(GyroscopeActivity.this, MainActivity.class);
                 startActivity(intent);
                 return true;
 
@@ -214,14 +214,14 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
     private void setupPlotters() {
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> linearAccSensors = sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE);
-        mPlotters.add(new SensorPlotter("GYR", (GraphView) findViewById(R.id.graph_gyroscope), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue,VIEWPORT_SECONDS));
+        mPlotters.add(new SensorPlotter("GYR", (GraphView) findViewById(R.id.graph_gyroscope), SensorEventObservableFactory.createSensorEventObservable(linearAccSensors.get(0), sensorManager), state, increaseValue, VIEWPORT_SECONDS));
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(VIEWPORT_SECONDS > 0) {
-            outState.putSerializable("VIEWPORT_SECONDS",VIEWPORT_SECONDS);
+        if (VIEWPORT_SECONDS > 0) {
+            outState.putSerializable("VIEWPORT_SECONDS", VIEWPORT_SECONDS);
         }
 
     }

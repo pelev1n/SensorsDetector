@@ -18,7 +18,7 @@ import rx.Subscription;
  * Draws graph of sensor events
  */
 public class SensorPlotterPrint {
-    private  int MAX_DATA_POINTS;
+    private int MAX_DATA_POINTS;
     private int VIEWPORT_SECONDS;
     public static final int FPS = 10;
 
@@ -37,20 +37,20 @@ public class SensorPlotterPrint {
     private long mLastUpdated = mStart;
     private Subscription mSubscription;
     private String state;
-    private Map<String,Double> incValue;
+    private Map<String, Double> incValue;
     private AccelerGyrosActivity activity;
     GraphView graphView;
 
-    public SensorPlotterPrint(@NonNull String name, @NonNull  GraphView graphViewOutside,
-                              @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String,Double> incValue,
-                              AccelerGyrosActivity view,int v) {
+    public SensorPlotterPrint(@NonNull String name, @NonNull GraphView graphViewOutside,
+                              @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String, Double> incValue,
+                              AccelerGyrosActivity view, int v) {
         this.incValue = incValue;
         this.state = state;
         mName = name;
         mSensorEventObservable = sensorEventObservable;
         this.activity = view;
         this.VIEWPORT_SECONDS = v;
-        MAX_DATA_POINTS = VIEWPORT_SECONDS*10;
+        MAX_DATA_POINTS = VIEWPORT_SECONDS * 10;
 
         this.graphView = graphViewOutside;
         graphView.getViewport().setXAxisBoundsManual(true);
@@ -88,11 +88,11 @@ public class SensorPlotterPrint {
     }
 
 
-    public void onResume(){
+    public void onResume() {
         mSubscription = mSensorEventObservable.subscribe(this::onSensorChanged);
     }
 
-    public void onPause(){
+    public void onPause() {
         mSubscription.unsubscribe();
     }
 
@@ -145,9 +145,10 @@ public class SensorPlotterPrint {
         this.state = s;
     }
 
-    public void setIncValue(Map<String,Double> v) {
+    public void setIncValue(Map<String, Double> v) {
         this.incValue = v;
     }
+
     private long getX() {
         return System.currentTimeMillis() - mStart;
     }

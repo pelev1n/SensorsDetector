@@ -37,10 +37,10 @@ public class SensorPlotter {
     private long mLastUpdated = mStart;
     private Subscription mSubscription;
     private String state;
-    private Map<String,Double> incValue;
+    private Map<String, Double> incValue;
 
-    public SensorPlotter(@NonNull String name, @NonNull  GraphView graphView,
-                         @NonNull Observable<SensorEvent> sensorEventObservable,String state,Map<String,Double> incValue) {
+    public SensorPlotter(@NonNull String name, @NonNull GraphView graphView,
+                         @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String, Double> incValue) {
         this.incValue = incValue;
         this.state = state;
         mName = name;
@@ -80,14 +80,14 @@ public class SensorPlotter {
         graphView.addSeries(mSeriesZf);
     }
 
-    public SensorPlotter(@NonNull String name, @NonNull  GraphView graphView,
-                         @NonNull Observable<SensorEvent> sensorEventObservable,String state,Map<String,Double> incValue,int v) {
+    public SensorPlotter(@NonNull String name, @NonNull GraphView graphView,
+                         @NonNull Observable<SensorEvent> sensorEventObservable, String state, Map<String, Double> incValue, int v) {
         this.incValue = incValue;
         this.state = state;
         mName = name;
         mSensorEventObservable = sensorEventObservable;
         this.VIEWPORT_SECONDS = v;
-        MAX_DATA_POINTS = VIEWPORT_SECONDS*10;
+        MAX_DATA_POINTS = VIEWPORT_SECONDS * 10;
 
 
         graphView.getViewport().setXAxisBoundsManual(true);
@@ -125,11 +125,11 @@ public class SensorPlotter {
     }
 
 
-    public void onResume(){
+    public void onResume() {
         mSubscription = mSensorEventObservable.subscribe(this::onSensorChanged);
     }
 
-    public void onPause(){
+    public void onPause() {
         mSubscription.unsubscribe();
     }
 
@@ -178,9 +178,10 @@ public class SensorPlotter {
         this.state = s;
     }
 
-    public void setIncValue(Map<String,Double> v) {
+    public void setIncValue(Map<String, Double> v) {
         this.incValue = v;
     }
+
     private long getX() {
         return System.currentTimeMillis() - mStart;
     }
