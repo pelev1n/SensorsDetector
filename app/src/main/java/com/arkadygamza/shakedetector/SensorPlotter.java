@@ -85,9 +85,9 @@ public class SensorPlotter {
         this.incValue = incValue;
         this.state = state;
         mName = name;
+        mSensorEventObservable = sensorEventObservable;
         this.VIEWPORT_SECONDS = v;
         MAX_DATA_POINTS = VIEWPORT_SECONDS*10;
-        mSensorEventObservable = sensorEventObservable;
 
 
         graphView.getViewport().setXAxisBoundsManual(true);
