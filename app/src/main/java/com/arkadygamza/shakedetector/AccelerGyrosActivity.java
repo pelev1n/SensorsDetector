@@ -1,6 +1,5 @@
 package com.arkadygamza.shakedetector;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;

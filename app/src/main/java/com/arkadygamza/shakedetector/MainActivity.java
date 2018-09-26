@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnX.setEnabled(false);
         btnY.setEnabled(false);
         btnZ.setEnabled(false);
-        btnCancel.setEnabled(false);
         btnAll.setEnabled(false);
 
         Observable<String> valueObservable = RxEditText.getTextWatcherObservable(editValue);
@@ -156,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnX.setEnabled(aBoolean);
                 btnY.setEnabled(aBoolean);
                 btnZ.setEnabled(aBoolean);
-                btnCancel.setEnabled(aBoolean);
                 btnAll.setEnabled(aBoolean);
             }
         });

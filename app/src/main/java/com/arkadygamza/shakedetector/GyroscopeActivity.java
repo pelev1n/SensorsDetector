@@ -140,7 +140,6 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
         btnX.setEnabled(false);
         btnY.setEnabled(false);
         btnZ.setEnabled(false);
-        btnCancel.setEnabled(false);
         btnAll.setEnabled(false);
 
         Observable<String> valueObservable = RxEditText.getTextWatcherObservable(editValue);
@@ -158,7 +157,6 @@ public class GyroscopeActivity extends AppCompatActivity implements View.OnClick
                 btnX.setEnabled(aBoolean);
                 btnY.setEnabled(aBoolean);
                 btnZ.setEnabled(aBoolean);
-                btnCancel.setEnabled(aBoolean);
                 btnAll.setEnabled(aBoolean);
             }
         });
